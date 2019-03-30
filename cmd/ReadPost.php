@@ -9,4 +9,4 @@ $dotenv = new Dotenv\Dotenv(__DIR__."/../config/");
 $dotenv->load();
 
 $controller = new ReadPostController();
-$controller->read();
+$controller->readAndPost();

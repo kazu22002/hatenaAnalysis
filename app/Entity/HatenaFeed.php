@@ -10,6 +10,7 @@ namespace App\Entity;
  * @package App\Entity
  */
 class HatenaFeed {
+    public $id;
     public $title;
     public $updated;
     public $published;
@@ -18,14 +19,16 @@ class HatenaFeed {
     public $category = [];
 
     /**
+     * Todo: 下書き段階の内容も取得されている
      * @param $object
      */
     public function __construct($object){
-        $this->title = $object->title;
-        $this->updated = $object->updated;
-        $this->published = $object->published;
-        $this->summary = $object->summary;
-        $this->content = $object->content;
+        $this->id = (string)$object->id;
+        $this->title = (string)$object->title;
+        $this->updated = (string)$object->updated;
+        $this->published = (string)$object->published;
+        $this->summary = (string)$object->summary;
+        $this->content = (string)$object->content;
         $attributes = "@attributes";
         foreach( $object->category as $v ){
             // jsonへ

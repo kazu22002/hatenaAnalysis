@@ -9,12 +9,12 @@
 namespace App\Controllers;
 
 use App\Usecases\Analysis;
+use App\Usecases\GoogleSheetsApi;
 use App\Usecases\HatenaGet;
-use App\Entity\HatenaFeed;
 
 class ReadPostController {
 
-    public function read(){
+    public function readAndPost(){
         $get = new HatenaGet();
         $data = $get->get();
         if ($data == false) {
@@ -22,7 +22,11 @@ class ReadPostController {
         }
         $analysis = new Analysis();
         $analysis->analysis($data);
+
+        $logic = new GoogleSheetsApi();
+        $logic->appendHatenaFeed($logic->appendHatenaFeedTransfer($data));
     }
+
 }
 
 

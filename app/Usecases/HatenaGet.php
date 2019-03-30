@@ -25,13 +25,16 @@ class HatenaGet{
 
         $feed = [];
         foreach($xml as $key => $val ){
-            $feed[] = new HatenaFeed($val);
+            $t = new HatenaFeed($val);
+            if( $t->id != ""){
+                $feed[] = $t;
+            }
         }
 
         $attributes = "@attributes";
         $nextLink = "";
-        // about 5 loop
-        for($i = 0; $i < 5;$i++){
+        // 7 * 200 = 1400ぐらい取得できる
+        for($i = 0; $i < 200 ;$i++){
             foreach($xml as $key => $val){
                 if( $key == "link" ) {
                     // jsonへ
@@ -43,7 +46,10 @@ class HatenaGet{
                         $nextBuf = $this->getLinkAll( $jsonCategory[$attributes]["href"] );
                         $xml = simplexml_load_string($nextBuf);
                         foreach($xml as $k => $v ){
-                            $feed[] = new HatenaFeed($v);
+                            $t = new HatenaFeed($v);
+                            if( $t->id != ""){
+                                $feed[] = $t;
+                            }
                         }
                     }
                 }

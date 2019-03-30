@@ -28,7 +28,6 @@ class Analysis{
 
             $this->calcAnalysis($v);
         }
-        var_dump($this->category);
     }
 
     protected function get($data, $i) : HatenaFeed {
